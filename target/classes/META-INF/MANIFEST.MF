@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Built-By: rafael
+Build-Jdk: 1.8.0_144
+Main-Class: com.yourapp.app.YourMainClass
+Created-By: Maven Integration for Eclipse
+
