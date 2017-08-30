@@ -5,7 +5,7 @@ import exercicio.exception.IllegalMovement;
 public enum Movement {
 	M, L, R, U, D;
 
-	public static Movement parse(String mov) throws IllegalMovement {
+	public static Movement parse(String mov) {
 		for (Movement movement : Movement.values()) {
 			if (movement.toString().equals(mov)) {
 				return movement;

@@ -5,12 +5,7 @@ import java.util.List;
 
 import exercicio.command.Command;
 import exercicio.command.CommandReceiver;
-import exercicio.command.DownCommand;
-import exercicio.command.MoveCommand;
-import exercicio.command.TurnLeftCommand;
-import exercicio.command.TurnRightCommand;
-import exercicio.command.UpCommand;
-import exercicio.entity.Direcao;
+import exercicio.command.Commands;
 import exercicio.entity.Movement;
 import exercicio.entity.Submarino;
 
@@ -29,30 +24,8 @@ public class Movements implements MovementsIterator {
 	@Override
 	public void next() {
 		Movement movement = movements.next();
-		switch (movement) {
-		case M:
-			Command moveCommand = new MoveCommand(commandReceiver);
-			moveCommand.execute();
-			break;
-		case L:
-			Command leftCommand = new TurnLeftCommand(commandReceiver);
-			leftCommand.execute();
-			break;
-		case R:
-			Command rightCommand = new TurnRightCommand(commandReceiver);
-			rightCommand.execute();
-			break;
-		case D:
-			Command downCommand = new DownCommand(commandReceiver);
-			downCommand.execute();
-			break;
-		case U:
-			Command upCommand = new UpCommand(commandReceiver);
-			upCommand.execute();
-			break;
-		default:
-			break;
-		}
+		Command command = Commands.get(movement, this.commandReceiver);
+		command.execute();
 	}
 
 	@Override

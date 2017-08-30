@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import exercicio.entity.Movement;
 import exercicio.entity.Submarino;
-import exercicio.exception.IllegalMovement;
 
 public class ControladorTest {
 
@@ -24,7 +23,7 @@ public class ControladorTest {
 	}
 
 	@Test
-	public void executeMovimentMoveTest() throws IllegalMovement {
+	public void executeMovimentMoveTest() {
 		addMovements("M");
 		controlador.executeMovements();
 		String coordenadas = controlador.recuperarCoordenadasSubmarino();
@@ -32,7 +31,7 @@ public class ControladorTest {
 	}
 
 	@Test
-	public void executeMovimentLeftTest() throws IllegalMovement {
+	public void executeMovimentLeftTest() {
 		addMovements("L");
 		controlador.executeMovements();
 		String coordenadas = controlador.recuperarCoordenadasSubmarino();
@@ -40,7 +39,7 @@ public class ControladorTest {
 	}
 
 	@Test
-	public void executeMovimentRightTest() throws IllegalMovement {
+	public void executeMovimentRightTest() {
 		addMovements("R");
 		controlador.executeMovements();
 		String coordenadas = controlador.recuperarCoordenadasSubmarino();
@@ -48,7 +47,7 @@ public class ControladorTest {
 	}
 
 	@Test
-	public void executeMovimentDownTest() throws IllegalMovement {
+	public void executeMovimentDownTest() {
 		addMovements("D");
 		controlador.executeMovements();
 		String coordenadas = controlador.recuperarCoordenadasSubmarino();
@@ -56,7 +55,7 @@ public class ControladorTest {
 	}
 
 	@Test
-	public void executeMovimentUpTest() throws IllegalMovement {
+	public void executeMovimentUpTest() {
 		addMovements("D");
 		addMovements("D");
 		addMovements("U");
@@ -66,14 +65,14 @@ public class ControladorTest {
 	}
 
 	@Test
-	public void executeMultipleMovimentsTest() throws IllegalMovement {
+	public void executeMultipleMovimentsTest() {
 		addMovements("LMRDDMMUU");
 		controlador.executeMovements();
 		String coordenadas = controlador.recuperarCoordenadasSubmarino();
 		assertEquals("-1 2 0 NORTE", coordenadas);
 	}
 
-	private void addMovements(String movs) throws IllegalMovement {
+	private void addMovements(String movs) {
 		String[] movements = movs.split("");
 		List<Movement> movementList = new ArrayList<>();
 		for (String mov : movements) {
