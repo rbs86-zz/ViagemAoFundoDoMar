@@ -1,5 +1,7 @@
 package exercicio.command;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import exercicio.entity.Direcao;
 import exercicio.entity.Submarino;
 
@@ -20,38 +22,31 @@ public class CommandReceiver {
 	}
 
 	void turnLeft() {
-		if (Direcao.NORTE.equals(submarino.getDirecao())) {
-			submarino.setDirecao(Direcao.OESTE);
-		} else if (Direcao.LESTE.equals(submarino.getDirecao())) {
-			submarino.setDirecao(Direcao.NORTE);
-		} else if (Direcao.SUL.equals(submarino.getDirecao())) {
-			submarino.setDirecao(Direcao.LESTE);
-		} else if (Direcao.OESTE.equals(submarino.getDirecao())) {
-			submarino.setDirecao(Direcao.SUL);
-		}
+		Direcao[] direcoes = Direcao.values();
+		int direcaoCorrente = ArrayUtils.indexOf(direcoes, submarino.getDirecao());
+		Direcao novaDirecao = direcoes[(direcaoCorrente + direcoes.length - 1) % direcoes.length];
+		submarino.setDirecao(novaDirecao);
 	}
 
 	void turnRight() {
-		if (Direcao.NORTE.equals(submarino.getDirecao())) {
-			submarino.setDirecao(Direcao.LESTE);
-		} else if (Direcao.LESTE.equals(submarino.getDirecao())) {
-			submarino.setDirecao(Direcao.SUL);
-		} else if (Direcao.SUL.equals(submarino.getDirecao())) {
-			submarino.setDirecao(Direcao.OESTE);
-		} else if (Direcao.OESTE.equals(submarino.getDirecao())) {
-			submarino.setDirecao(Direcao.NORTE);
-		}
+		Direcao[] direcoes = Direcao.values();
+		int direcaoCorrente = ArrayUtils.indexOf(direcoes, submarino.getDirecao());
+		Direcao novaDirecao = direcoes[(direcaoCorrente + direcoes.length + 1) % direcoes.length];
+		submarino.setDirecao(novaDirecao);
 	}
 
 	void move() {
+		int x = submarino.getCoordenadas().getX();
+		int y = submarino.getCoordenadas().getY();
+
 		if (Direcao.NORTE.equals(submarino.getDirecao())) {
-			submarino.getCoordenadas().setY(submarino.getCoordenadas().getY() + 1);
+			submarino.getCoordenadas().setY(++y);
 		} else if (Direcao.LESTE.equals(submarino.getDirecao())) {
-			submarino.getCoordenadas().setX(submarino.getCoordenadas().getX() + 1);
+			submarino.getCoordenadas().setX(++x);
 		} else if (Direcao.SUL.equals(submarino.getDirecao())) {
-			submarino.getCoordenadas().setY(submarino.getCoordenadas().getY() - 1);
+			submarino.getCoordenadas().setY(--y);
 		} else if (Direcao.OESTE.equals(submarino.getDirecao())) {
-			submarino.getCoordenadas().setX(submarino.getCoordenadas().getX() - 1);
+			submarino.getCoordenadas().setX(--x);
 		}
 	}
 

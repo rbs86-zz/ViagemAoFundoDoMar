@@ -76,7 +76,7 @@ public class ControladorTest {
 		String[] movements = movs.split("");
 		List<Movement> movementList = new ArrayList<>();
 		for (String mov : movements) {
-			movementList.add(Movement.parse(mov));
+			movementList.add(Movement.valueOf(mov));
 		}
 		controlador.addMovements(movementList);
 	}

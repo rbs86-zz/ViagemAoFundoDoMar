@@ -28,9 +28,9 @@ public class Coordenadas {
 	}
 
 	public void setZ(int z) {
-		this.z = z;
+		this.z = z > 0 ? 0 : z;
 	}
-	
+
 	@Override
 	public String toString() {
 		return new StringBuilder().append(x).append(SPACE).append(y).append(SPACE).append(getZ()).toString();

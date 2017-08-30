@@ -4,6 +4,10 @@ import exercicio.entity.Movement;
 import exercicio.exception.IllegalMovement;
 
 public class Commands {
+	
+	private Commands(){
+		
+	}
 
 	public static Command get(Movement movement, CommandReceiver commandReceiver) {
 		switch (movement) {

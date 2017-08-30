@@ -13,7 +13,7 @@ public class Controlador {
 
 	public Controlador(Submarino submarino) {
 		this.movementList = new ArrayList<>();
-		this.setSubmarino(submarino);
+		this.submarino = submarino;
 	}
 
 	public void executeMovements() {
@@ -29,14 +29,6 @@ public class Controlador {
 
 	public String recuperarCoordenadasSubmarino() {
 		return submarino.getCoordenadas().toString() + " " + submarino.getDirecao();
-	}
-
-	public Submarino getSubmarino() {
-		return submarino;
-	}
-
-	public void setSubmarino(Submarino submarino) {
-		this.submarino = submarino;
 	}
 
 }
