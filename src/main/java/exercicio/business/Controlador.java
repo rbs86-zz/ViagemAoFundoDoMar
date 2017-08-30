@@ -11,25 +11,28 @@ public class Controlador {
 		this.setSubmarino(submarino);
 	}
 
-	public void executeMovements(String movement) {
-		switch (movement) {
-		case "M":
-			move();
-			break;
-		case "L":
-			turnLeft();
-			break;
-		case "R":
-			turnRight();
-			break;
-		case "D":
-			down();
-			break;
-		case "U":
-			up();
-			break;
-		default:
-			break;
+	public void executeMovements(String movements) {
+		String[] movs = movements.split("");
+		for (String movement : movs) {
+			switch (movement) {
+			case "M":
+				move();
+				break;
+			case "L":
+				turnLeft();
+				break;
+			case "R":
+				turnRight();
+				break;
+			case "D":
+				down();
+				break;
+			case "U":
+				up();
+				break;
+			default:
+				break;
+			}
 		}
 	}
 

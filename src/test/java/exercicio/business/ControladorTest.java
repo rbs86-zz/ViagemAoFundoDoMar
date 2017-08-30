@@ -54,5 +54,12 @@ public class ControladorTest {
 		String coordenadas = controlador.recuperarCoordenadasSubmarino();
 		assertEquals("0 0 -1 NORTE", coordenadas);
 	}
+	
+	@Test
+	public void executeMultipleMovimentsTest() {
+		controlador.executeMovements("LMRDDMMUU");
+		String coordenadas = controlador.recuperarCoordenadasSubmarino();
+		assertEquals("-1 2 0 NORTE", coordenadas);
+	}
 
 }
