@@ -2,13 +2,9 @@ package exercicio.business;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 
-import exercicio.entity.Movement;
 import exercicio.entity.Submarino;
 
 public class ControladorTest {
@@ -24,7 +20,7 @@ public class ControladorTest {
 
 	@Test
 	public void executeMovimentMoveTest() {
-		addMovements("M");
+		controlador.addMovements("M");
 		controlador.executeMovements();
 		String coordenadas = controlador.recuperarCoordenadasSubmarino();
 		assertEquals("0 1 0 NORTE", coordenadas);
@@ -32,7 +28,7 @@ public class ControladorTest {
 
 	@Test
 	public void executeMovimentLeftTest() {
-		addMovements("L");
+		controlador.addMovements("L");
 		controlador.executeMovements();
 		String coordenadas = controlador.recuperarCoordenadasSubmarino();
 		assertEquals("0 0 0 OESTE", coordenadas);
@@ -40,7 +36,7 @@ public class ControladorTest {
 
 	@Test
 	public void executeMovimentRightTest() {
-		addMovements("R");
+		controlador.addMovements("R");
 		controlador.executeMovements();
 		String coordenadas = controlador.recuperarCoordenadasSubmarino();
 		assertEquals("0 0 0 LESTE", coordenadas);
@@ -48,7 +44,7 @@ public class ControladorTest {
 
 	@Test
 	public void executeMovimentDownTest() {
-		addMovements("D");
+		controlador.addMovements("D");
 		controlador.executeMovements();
 		String coordenadas = controlador.recuperarCoordenadasSubmarino();
 		assertEquals("0 0 -1 NORTE", coordenadas);
@@ -56,9 +52,9 @@ public class ControladorTest {
 
 	@Test
 	public void executeMovimentUpTest() {
-		addMovements("D");
-		addMovements("D");
-		addMovements("U");
+		controlador.addMovements("D");
+		controlador.addMovements("D");
+		controlador.addMovements("U");
 		controlador.executeMovements();
 		String coordenadas = controlador.recuperarCoordenadasSubmarino();
 		assertEquals("0 0 -1 NORTE", coordenadas);
@@ -66,18 +62,9 @@ public class ControladorTest {
 
 	@Test
 	public void executeMultipleMovimentsTest() {
-		addMovements("LMRDDMMUU");
+		controlador.addMovements("LMRDDMMUU");
 		controlador.executeMovements();
 		String coordenadas = controlador.recuperarCoordenadasSubmarino();
 		assertEquals("-1 2 0 NORTE", coordenadas);
-	}
-
-	private void addMovements(String movs) {
-		String[] movements = movs.split("");
-		List<Movement> movementList = new ArrayList<>();
-		for (String mov : movements) {
-			movementList.add(Movement.valueOf(mov));
-		}
-		controlador.addMovements(movementList);
 	}
 }

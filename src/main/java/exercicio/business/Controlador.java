@@ -1,7 +1,9 @@
 package exercicio.business;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import exercicio.entity.Movement;
 import exercicio.entity.Submarino;
@@ -23,8 +25,8 @@ public class Controlador {
 		}
 	}
 
-	public void addMovements(List<Movement> movements) {
-		this.movementList.addAll(movements);
+	public void addMovements(String movs) {
+		this.movementList.addAll(Arrays.stream(movs.split("")).map(Movement::valueOf).collect(Collectors.toList()));
 	}
 
 	public String recuperarCoordenadasSubmarino() {
