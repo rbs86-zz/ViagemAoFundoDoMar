@@ -3,6 +3,13 @@ package exercicio.business;
 import java.util.Iterator;
 import java.util.List;
 
+import exercicio.command.Command;
+import exercicio.command.CommandReceiver;
+import exercicio.command.DownCommand;
+import exercicio.command.MoveCommand;
+import exercicio.command.TurnLeftCommand;
+import exercicio.command.TurnRightCommand;
+import exercicio.command.UpCommand;
 import exercicio.entity.Direcao;
 import exercicio.entity.Movement;
 import exercicio.entity.Submarino;
@@ -11,10 +18,12 @@ public class Movements implements MovementsIterator {
 
 	private Iterator<Movement> movements;
 	private Submarino submarino;
+	private CommandReceiver commandReceiver;
 
 	public Movements(List<Movement> movementList, Submarino submarino) {
 		this.movements = movementList.iterator();
-		this.setSubmarino(submarino);
+		this.submarino = submarino;
+		this.commandReceiver = new CommandReceiver(this.submarino);
 	}
 
 	@Override
@@ -22,66 +31,27 @@ public class Movements implements MovementsIterator {
 		Movement movement = movements.next();
 		switch (movement) {
 		case M:
-			move();
+			Command moveCommand = new MoveCommand(commandReceiver);
+			moveCommand.execute();
 			break;
 		case L:
-			turnLeft();
+			Command leftCommand = new TurnLeftCommand(commandReceiver);
+			leftCommand.execute();
 			break;
 		case R:
-			turnRight();
+			Command rightCommand = new TurnRightCommand(commandReceiver);
+			rightCommand.execute();
 			break;
 		case D:
-			down();
+			Command downCommand = new DownCommand(commandReceiver);
+			downCommand.execute();
 			break;
 		case U:
-			up();
+			Command upCommand = new UpCommand(commandReceiver);
+			upCommand.execute();
 			break;
 		default:
 			break;
-		}
-	}
-
-	private void up() {
-		getSubmarino().getCoordenadas().setZ(getSubmarino().getCoordenadas().getZ() + 1);
-	}
-
-	private void down() {
-		getSubmarino().getCoordenadas().setZ(getSubmarino().getCoordenadas().getZ() - 1);
-	}
-
-	private void turnLeft() {
-		if (Direcao.NORTE.equals(getSubmarino().getDirecao())) {
-			getSubmarino().setDirecao(Direcao.OESTE);
-		} else if (Direcao.LESTE.equals(getSubmarino().getDirecao())) {
-			getSubmarino().setDirecao(Direcao.NORTE);
-		} else if (Direcao.SUL.equals(getSubmarino().getDirecao())) {
-			getSubmarino().setDirecao(Direcao.LESTE);
-		} else if (Direcao.OESTE.equals(getSubmarino().getDirecao())) {
-			getSubmarino().setDirecao(Direcao.SUL);
-		}
-	}
-
-	private void turnRight() {
-		if (Direcao.NORTE.equals(getSubmarino().getDirecao())) {
-			getSubmarino().setDirecao(Direcao.LESTE);
-		} else if (Direcao.LESTE.equals(getSubmarino().getDirecao())) {
-			getSubmarino().setDirecao(Direcao.SUL);
-		} else if (Direcao.SUL.equals(getSubmarino().getDirecao())) {
-			getSubmarino().setDirecao(Direcao.OESTE);
-		} else if (Direcao.OESTE.equals(getSubmarino().getDirecao())) {
-			getSubmarino().setDirecao(Direcao.NORTE);
-		}
-	}
-
-	private void move() {
-		if (Direcao.NORTE.equals(getSubmarino().getDirecao())) {
-			getSubmarino().getCoordenadas().setY(getSubmarino().getCoordenadas().getY() + 1);
-		} else if (Direcao.LESTE.equals(getSubmarino().getDirecao())) {
-			getSubmarino().getCoordenadas().setX(getSubmarino().getCoordenadas().getX() + 1);
-		} else if (Direcao.SUL.equals(getSubmarino().getDirecao())) {
-			getSubmarino().getCoordenadas().setY(getSubmarino().getCoordenadas().getY() - 1);
-		} else if (Direcao.OESTE.equals(getSubmarino().getDirecao())) {
-			getSubmarino().getCoordenadas().setX(getSubmarino().getCoordenadas().getX() - 1);
 		}
 	}
 
