@@ -1,33 +1,38 @@
 package exercicio.business;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import exercicio.entity.Direcao;
+import exercicio.entity.Movement;
 import exercicio.entity.Submarino;
 
 public class Controlador {
 
 	private Submarino submarino;
+	private List<Movement> movementList;
 
 	public Controlador(Submarino submarino) {
+		this.movementList = new ArrayList<>();
 		this.setSubmarino(submarino);
 	}
 
-	public void executeMovements(String movements) {
-		String[] movs = movements.split("");
-		for (String movement : movs) {
+	public void executeMovements() {
+		for (Movement movement : this.movementList) {
 			switch (movement) {
-			case "M":
+			case M:
 				move();
 				break;
-			case "L":
+			case L:
 				turnLeft();
 				break;
-			case "R":
+			case R:
 				turnRight();
 				break;
-			case "D":
+			case D:
 				down();
 				break;
-			case "U":
+			case U:
 				up();
 				break;
 			default:
@@ -78,6 +83,10 @@ public class Controlador {
 		} else if (Direcao.OESTE.equals(submarino.getDirecao())) {
 			submarino.getCoordenadas().setX(submarino.getCoordenadas().getX() - 1);
 		}
+	}
+
+	public void addMovements(List<Movement> movements) {
+		this.movementList.addAll(movements);
 	}
 
 	public String recuperarCoordenadasSubmarino() {
